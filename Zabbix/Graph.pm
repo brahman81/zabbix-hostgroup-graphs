@@ -48,7 +48,7 @@ sub new {
     # Set some defaults
     $self->{now} = time();
     $self->{rpc_client} = new JSON::RPC::Client;
-    $self->{graph_colors} = qw(FF0000 00FF00 0000FF FFFF00 00FFFF FF00FF FFFF99 FF6699 99FF99 993399);
+    $self->{graph_colors} = [qw(FF0000 00FF00 0000FF FFFF00 00FFFF FF00FF FFFF99 FF6699 99FF99 993399)];
 
     bless($self, $class);
 }
