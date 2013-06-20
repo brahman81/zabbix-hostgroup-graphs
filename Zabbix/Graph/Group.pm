@@ -30,22 +30,35 @@ retrieve a list of all host groups matching filter name.
 =cut
 sub get_groups {
     my $self = shift;
-    my $filter = shift || ".*";
+    my $filter = shift || undef;
+    my $query;
     # retrieve all host groups
-    my $query = {
-        "jsonrpc" => "2.0",
-        "method" => "hostgroup.get",
-        "params" => {
-            "output" => "extend",
-            "filter" => {
-                "name" => [
-                    $filter,
-                ]
-            }
-        },
-        "auth" => $self->{authid},
-        "id" => 1,
-    };
+    unless ($filter) {
+        $query = {
+            "jsonrpc" => "2.0",
+            "method" => "hostgroup.get",
+            "params" => {
+                "output" => "extend",
+            },
+            "auth" => $self->{authid},
+            "id" => 1,
+        };
+    } else {
+        $query = {
+            "jsonrpc" => "2.0",
+            "method" => "hostgroup.get",
+            "params" => {
+                "output" => "extend",
+                "filter" => {
+                    "name" => [
+                        $filter,
+                    ]
+                }
+            },
+            "auth" => $self->{authid},
+            "id" => 1,
+        };
+    }
 
     # process host groups using filter, store in a list
     my $response = $self->{'rpc_client'}->call($self->{'url'}, $query);
