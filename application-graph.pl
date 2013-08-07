@@ -28,6 +28,7 @@ my $username = 'username';
 my $password = 'password';
 my $application_name = 'Apache2'
 my $graph_name = 'Apache2 Items';
+my $graph_type = 1; # 0 =>  normal, 1 =>  stacked ...
 my $hostid = '12345'; # id of host the graph should be applied to
 
 my $obj = Zabbix::Graph->new({url => $url,username => $username,password => $password, verbose => '1'});
@@ -37,4 +38,4 @@ $obj->connect();
 # main()
 my $app_id = $obj->get_host_app_id($hostid,$application_name);
 my @items = $obj->get_app_items($app_id,$hostid);
-$obj->graph($graph_name,\@items);
+$obj->graph($graph_name,\@items,$graph_type);
