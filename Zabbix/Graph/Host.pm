@@ -63,4 +63,36 @@ sub get_items {
     }
 }
 
+sub get_host_app_id {
+    my $self = shift;
+    if (@_) {
+        my $hostid = shift;
+        my $application_name = shift;
+
+        my $query = {
+            "jsonrpc" => "2.0",
+            "method" => "application.get",
+            "params" => {
+                "output" => "extend",
+                "hostids" => $hostid,
+                "sortfield" => "name",
+                "filter" => {
+                    "name" => $application_name,
+                }
+            },
+            "auth" => $self->{authid},
+            "id" => 1
+        };
+
+        my $response = $self->{'rpc_client'}->call($self->{'url'}, $query);
+        if ($response->is_success == 1) {
+            foreach my $item (@{$response->{content}->{result}}) {
+                if (${$item}{applicationid}) {
+                    $self->output("info: found $application_name (${$item}{applicationid})");
+                }
+            }
+        }
+    }
+}
+
 1;
