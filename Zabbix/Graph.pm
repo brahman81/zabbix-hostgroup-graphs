@@ -24,12 +24,13 @@ use JSON::RPC::Client;
 
 package Zabbix::Graph;
 
+use Zabbix::Graph::Application;
 use Zabbix::Graph::Base;
 use Zabbix::Graph::Create;
 use Zabbix::Graph::Group;
 use Zabbix::Graph::Host;
 
-@Zabbix::Graph::ISA = qw( Zabbix::Graph::Base Zabbix::Graph::Create Zabbix::Graph::Group Zabbix::Graph::Host );
+@Zabbix::Graph::ISA = qw( Zabbix::Graph::Application Zabbix::Graph::Base Zabbix::Graph::Create Zabbix::Graph::Group Zabbix::Graph::Host );
 
 =head2 Zabbix::Graph::new()
 
@@ -48,7 +49,22 @@ sub new {
     # Set some defaults
     $self->{now} = time();
     $self->{rpc_client} = new JSON::RPC::Client;
-    $self->{graph_colors} = [qw(FF0000 00FF00 0000FF FFFF00 00FFFF FF00FF FFFF99 FF6699 99FF99 993399)];
+    $self->{graph_colors} = [qw(
+        FF0000 00FF00 0000FF FFFF00
+        00FFFF FF00FF FFFF99 FF6699
+        99FF99 993399 6960EC 736AFF
+        357EC7 488AC7 C8A2C8 E6A9EC
+        3090C7 659EC7 87AFC7 95B9C7
+        46C7C7 43BFC7 3EA99F 3B9C9C
+        438D80 348781 307D7E 64E986
+        5EFB6E 00FF00 5FFB17 87F717
+        8AFB17 6AFB92 7D0552 7F4E52
+        7F5A58 7F525D B38481 C5908E
+        C48189 E3319D F433FF D16587
+        C25A7C CA226B C12869 C12267
+        9172EC 9E7BFF D462FF E238EC
+        C38EC7
+    )];
 
     bless($self, $class);
 }
