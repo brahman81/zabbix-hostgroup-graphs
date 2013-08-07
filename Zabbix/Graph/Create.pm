@@ -75,14 +75,23 @@ sub graph_items {
         my $item_key = shift;
         my $group = shift;
         my %hosts = $self->get_hosts($group);
-        while (my ($hostgroup, $hosts_ref) = each(%hosts)) {
-            while (my ($host,$hostid) = each(%{$hosts_ref})) {
-                $self->output("info: $host ($hostgroup)");
-                $self->get_items($item_key,$hostgroup,$hostid);
+        if (scalar %hosts) {
+            while (my ($hostgroup, $hosts_ref) = each(%hosts)) {
+                if (scalar %{$hosts_ref}) {
+                    while (my ($host,$hostid) = each(%{$hosts_ref})) {
+                        $self->output("info: $host ($hostgroup)");
+                        $self->get_items($item_key,$hostgroup,$hostid);
+                    }
+                } else {
+                    $self->output("warning: $group is empty");
+                    @{$self->{hostitems}{$group}} = ();
+                }
             }
-        }
-        for(my $i=0; $i < @{$self->{hostitems}{$group}}; ++$i) {
-            push(@graph_items,{'itemid' => ${$self->{hostitems}{$group}}[$i],'color' => ${$self->{graph_colors}}[$i]});
+            if (scalar @{$self->{hostitems}{$group}}) {
+                for(my $i=0; $i < @{$self->{hostitems}{$group}}; ++$i) {
+                    push(@graph_items,{'itemid' => ${$self->{hostitems}{$group}}[$i],'color' => ${$self->{graph_colors}}[$i]});
+                }
+            }
         }
     }
     return \@graph_items;
