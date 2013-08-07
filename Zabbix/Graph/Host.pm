@@ -68,6 +68,7 @@ sub get_host_app_id {
     if (@_) {
         my $hostid = shift;
         my $application_name = shift;
+        my $applicationid;
 
         my $query = {
             "jsonrpc" => "2.0",
@@ -89,9 +90,11 @@ sub get_host_app_id {
             foreach my $item (@{$response->{content}->{result}}) {
                 if (${$item}{applicationid}) {
                     $self->output("info: found $application_name (${$item}{applicationid})");
+                    $applicationid = ${$item}{applicationid};
                 }
             }
         }
+        return $applicationid;
     }
 }
 
