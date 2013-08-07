@@ -40,13 +40,13 @@ given ($opts{'g'}) {
     when (/all/) {
         my %groups = $obj->get_groups();
         while (my ($group,$groupid) = each(%groups)) {
-            $obj->graph($graph_name,'system.cpu.util[,user]',$group);
+            $obj->hostgroup_graph($graph_name,'system.cpu.util[,user]',$group);
         }
     }
     default {
         my %groups = $obj->get_groups($opts{'g'});
         while (my ($group,$groupid) = each(%groups)) {
-            $obj->graph($graph_name,'system.cpu.util[,user]',$group);
+            $obj->hostgroup_graph($graph_name,'system.cpu.util[,user]',$group);
         }
     }
 }
