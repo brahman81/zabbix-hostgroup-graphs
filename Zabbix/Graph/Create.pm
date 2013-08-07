@@ -23,7 +23,7 @@ use warnings;
 
 package Zabbix::Graph::Create;
 
-=head 2
+=head2 Zabbix::Graph::Create::graph()
 
 creates a zabbix graph
 
@@ -63,7 +63,7 @@ sub graph
     }
 }
 
-=head 2
+=head2 Zabbix::Graph::Create::graph_items()
 
 creates a data structure of items for use with graph()
 
@@ -88,7 +88,7 @@ sub graph_items {
     return \@graph_items;
 }
 
-=head 2
+=head2 Zabbix::Graph::Create::delete_graph()
 
 delete graph if already exists, ensures the graph represents the latest Zabbix information
 

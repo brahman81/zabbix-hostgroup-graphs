@@ -23,7 +23,7 @@ use warnings;
 
 package Zabbix::Graph::Host;
 
-=head 2
+=head2 Zabbix::Graph::Host::get_items()
 
 get a list of itemids for all members of group X given item.key
 

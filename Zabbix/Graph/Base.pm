@@ -23,7 +23,7 @@ use warnings;
 
 package Zabbix::Graph::Base;
 
-=head 2
+=head2 Zabbix::Graph::Base::connect()
 
 connects to a zabbix server stores authid in object as well as returning authid
 
@@ -49,7 +49,7 @@ sub connect
     return $self->{'authid'}
 }
 
-=head2
+=head2 Zabbix::Graph::Base::output()
 
 print message if $self->{verbose} = 1, appending a newline
 

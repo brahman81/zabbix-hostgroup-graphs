@@ -31,7 +31,7 @@ use Zabbix::Graph::Host;
 
 @Zabbix::Graph::ISA = qw( Zabbix::Graph::Base Zabbix::Graph::Create Zabbix::Graph::Group Zabbix::Graph::Host );
 
-=head 2
+=head2 Zabbix::Graph::new()
 
 create a Zabbix::Graph object
 

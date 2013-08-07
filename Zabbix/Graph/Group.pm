@@ -23,7 +23,7 @@ use warnings;
 
 package Zabbix::Graph::Group;
 
-=head 2
+=head2 Zabbix::Graph::Group::get_groups()
 
 retrieve a list of all host groups matching filter name.
 
@@ -72,7 +72,7 @@ sub get_groups {
     }
 }
 
-=head 2
+=head2 Zabbix::Graph::Group::get_group_id()
 
 return hostgroup id given hostgroup name
 
@@ -88,7 +88,7 @@ sub get_group_id {
     }
 }
 
-=head 2
+=head2 Zabbix::Graph::Group::get_hosts()
 
 retrieve a list of all hosts in a given host group
 
