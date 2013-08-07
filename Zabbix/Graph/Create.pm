@@ -33,6 +33,44 @@ sub graph
     my $self = shift;
     if(@_) {
         my $graph_name = shift;
+        my $items_ref = shift;
+        my $graph_type = shift;
+
+        unless ($graph_name and $items_ref) {
+            exit 12;
+        }
+
+        my $query = {
+            "jsonrpc" => "2.0",
+            "method" => "graph.create",
+            "params" => {
+                "name" => $graph_name,
+                "graphtype" => $graph_type,
+                "width" => 900,
+                "height" => 200,
+                "gitems" => $items_ref,
+            },
+            "auth" => $self->{authid},
+            "id" => 1
+        };
+
+        my $response = $self->{'rpc_client'}->call($self->{'url'}, $query);
+        if ($response->is_success == 1) {
+            $self->output("info: creating $graph_name");
+        }
+    }
+}
+
+=head2 Zabbix::Graph::Create::hostgroup_graph()
+
+creates a zabbix hostgroup graph
+
+=cut
+sub hostgroup_graph
+{
+    my $self = shift;
+    if(@_) {
+        my $graph_name = shift;
         my $item_key = shift;
         my $group = shift;
 
