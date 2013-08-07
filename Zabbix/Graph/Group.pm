@@ -116,9 +116,16 @@ sub get_hosts {
         my $response = $self->{'rpc_client'}->call($self->{'url'}, $query);
         if ($response->is_success == 1) {
             $self->output("info: processing $group");
-            foreach my $host (@{$response->{content}->{result}}) {
-                $self->output("info: found ${$host}{name}");
-                $self->{hosts}{$group}{${$host}{name}} = ${$host}{hostid};
+            unless (scalar @{$response->{content}->{result}} == 0) {
+                foreach my $host (@{$response->{content}->{result}}) {
+                    if (${$host}{name}) {
+                        $self->output("info: found ${$host}{name}");
+                        $self->{hosts}{$group}{${$host}{name}} = ${$host}{hostid};
+                    }
+                }
+            } else {
+                $self->output("warning: no hosts in $group");
+                $self->{hosts}{$group} = {};
             }
             return %{$self->{hosts}};
         }
