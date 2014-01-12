@@ -26,7 +26,7 @@ use Zabbix::Graph;
 my $url = 'https://zabbix.example.com/zabbix/api_jsonrpc.php';
 my $username = 'username';
 my $password = 'password';
-my $application_name = 'Apache2'
+my $application_name = 'Apache2';
 my $graph_name = 'Apache2 Items';
 my $graph_type = 1; # 0 =>  normal, 1 =>  stacked ...
 my $hostid = '12345'; # id of host the graph should be applied to
